@@ -20,8 +20,8 @@ export class ProductoService {
   {
     return this.http.post(`${this.url}/api/v1/Producto`,producto);
   }
-  EditarProducto(producto:EditarProductos){
-    return this.http.put(`${this.url}/api/v1/Producto`,producto);
+  EditarProducto(producto:EditarProductos,idProducto:number){
+    return this.http.put(`${this.url}/api/v1/Producto/${idProducto}`,producto);
   }
 
   EliminarProducto(idProducto:number){
