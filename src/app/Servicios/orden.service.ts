@@ -10,6 +10,6 @@ export class OrdenService {
   url:string=environment.apiUrl;
   constructor(private http:HttpClient) { }
   CrearOrden(orden:CrearOrden){
-    return this.http.post<RespuestaCrearOrden>(`${this.url}/api/v1/Orden`,orden);
+    return this.http.post<RespuestaCrearOrden>(`${this.url}/api/v1/Producto/GenerarOrden`,orden);
   }
 }

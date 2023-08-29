@@ -5,6 +5,8 @@ import { ProductService } from 'src/app/demo/service/product.service';
 import { MessageService } from 'primeng/api';
 import { CrearProductos, EditarProductos, ObtenerProductos } from 'src/app/Modelos/Producto';
 import { ProductoService } from 'src/app/Servicios/producto.service';
+import { CrearOrden } from 'src/app/Modelos/Orden';
+import { OrdenService } from 'src/app/Servicios/orden.service';
 
 @Component({
   selector: 'app-producto',
@@ -18,7 +20,11 @@ export class ProductoComponent implements OnInit{
   deleteProductDialog: boolean = false;
 
   deleteProductsDialog: boolean = false;
-
+  orderProductDialog: boolean = false;  
+  order:CrearOrden={
+    productoId:0,
+    cantidad:0  
+  }
   products: ObtenerProductos[] = [];
 
   product: ObtenerProductos = {
@@ -37,7 +43,7 @@ export class ProductoComponent implements OnInit{
 
   rowsPerPageOptions = [5, 10, 20];
 
-  constructor(private productService: ProductoService, private messageService: MessageService) { }
+  constructor(private orderService:OrdenService,private productService: ProductoService, private messageService: MessageService) { }
   
   ngOnInit() {
       this.productService.ObtenerProductos().subscribe(data => this.products = data);
@@ -88,6 +94,7 @@ isEdit:boolean=false;
 
   hideDialog() {
       this.productDialog = false;
+      this.orderProductDialog=false;  
       this.submitted = false;
   }
 
@@ -147,5 +154,20 @@ isEdit:boolean=false;
   }
 
   listProduct(id:number){
+  }
+  createOrder(productId:number){
+    this.orderProductDialog = true;
+    this.order.productoId=productId;
+  }
+  saveOrder(){
+    this.orderService.CrearOrden(this.order).subscribe(data => {
+      // this.messageService.add({ severity: 'success', summary: 'Orden', detail: 'Orden Creada', life: 3000 });
+      this.orderProductDialog = false;
+      if(data.materialFaltante.length>0){
+        this.messageService.add({ severity: 'warn', summary: 'Orden', detail: 'Material Faltante', life: 3000 });
+      }
+    },err=>{
+      this.orderProductDialog = false;
+    });
   }
 }

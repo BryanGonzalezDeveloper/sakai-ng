@@ -46,6 +46,7 @@
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
                                
                                 <p-button label="Listado material" [routerLink]="['./listado',product.id]"></p-button>
+                                <button pButton pRipple  class="p-button p-button-info" (click)="createOrder(product.id)">Realizar pedido</button>
                             </div>
                         </td>
                     </tr>
@@ -83,6 +84,23 @@
             <ng-template pTemplate="footer">
                 <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
                 <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Si" (click)="confirmDelete(product.id)"></button>
+            </ng-template>
+        </p-dialog>
+
+        <p-dialog [(visible)]="orderProductDialog" header="Pedido" [modal]="true" [style]="{width:'450px'}">
+            <ng-template pTemplate="content">
+              
+                <div class="formgrid grid">
+                    <div class="field col">
+                        <label for="cantidad">Cantidad</label><br>
+                        <p-inputNumber id="cantidad" [(ngModel)]="order.cantidad"></p-inputNumber>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Crear orden" icon="pi pi-check" class="p-button-text" (click)="saveOrder()"></button>
             </ng-template>
         </p-dialog>
 
