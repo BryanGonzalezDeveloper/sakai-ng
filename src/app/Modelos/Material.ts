@@ -1,5 +1,5 @@
 export interface ObtenerMaterial {
-    nombreMaterial: string;
+    nombre: string;
     precio:         number;
     stockActual:    number;
     imagen:         string;
@@ -8,7 +8,7 @@ export interface ObtenerMaterial {
 
 
 export interface CrearEditarMaterial {
-    nombreMaterial: string;
+    nombre: string;
     precio:         number;
     stockActual:    number;
     imagen:         string;

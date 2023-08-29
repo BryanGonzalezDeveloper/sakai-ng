@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductoComponent } from './producto.component';
+import { MaterialRoutingModule } from './material-routing.module';
 import { FormsModule } from '@angular/forms';
 
 import { TableModule } from 'primeng/table';
@@ -16,16 +16,15 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
-import { ProductoRoutingModule } from './producto-routing.module';
-import { MaterialRoutingModule } from '../material/material-routing.module';
+import { MaterialComponent } from './material.component';
+
 
 
 @NgModule({
-  declarations: [ProductoComponent],
+  declarations: [MaterialComponent],
   imports: [
     CommonModule,
     MaterialRoutingModule,
-    ProductoRoutingModule,
     TableModule,
     FileUploadModule,
     FormsModule,
@@ -42,4 +41,4 @@ import { MaterialRoutingModule } from '../material/material-routing.module';
     DialogModule
   ]
 })
-export class ProductoModule { }
+export class MaterialModule { }

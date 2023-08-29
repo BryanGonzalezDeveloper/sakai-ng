@@ -20,8 +20,8 @@ export class MaterialService {
   CrearMaterial(material:CrearEditarMaterial){
     return this.http.post(`${this.url}/api/v1/Material`,material);
   }
-  EditarMaterial(material:CrearEditarMaterial){
-    return this.http.put(`${this.url}/api/v1/Material`,material);
+  EditarMaterial(material:CrearEditarMaterial,idMaterial:number){
+    return this.http.put(`${this.url}/api/v1/Material/${idMaterial}`,material);
   }
 
   EliminarMaterial(idMaterial:number){
