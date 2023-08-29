@@ -17,14 +17,12 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { ProductoRoutingModule } from './producto-routing.module';
-import { MaterialRoutingModule } from '../material/material-routing.module';
-
+import { ListadoProductoComponent } from '../listado-producto/listado-producto.component';
 
 @NgModule({
-  declarations: [ProductoComponent],
+  declarations: [ProductoComponent,ListadoProductoComponent],
   imports: [
     CommonModule,
-    MaterialRoutingModule,
     ProductoRoutingModule,
     TableModule,
     FileUploadModule,
