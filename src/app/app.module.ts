@@ -11,19 +11,24 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
-
+import { InventarioService } from './Servicios/inventario.service';
+import { MaterialService } from './Servicios/material.service';
+import { ProductoService } from './Servicios/producto.service';
+import { OrdenService } from './Servicios/orden.service';
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,
+        HttpClientModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        PhotoService, ProductService,InventarioService,MaterialService,ProductoService,OrdenService
     ],
     bootstrap: [AppComponent]
 })
