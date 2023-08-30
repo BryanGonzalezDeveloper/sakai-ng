@@ -7,6 +7,8 @@ import { CrearProductos, EditarProductos, ObtenerProductos } from 'src/app/Model
 import { ProductoService } from 'src/app/Servicios/producto.service';
 import { CrearOrden, MaterialFaltante } from 'src/app/Modelos/Orden';
 import { OrdenService } from 'src/app/Servicios/orden.service';
+import { GenerarInventario } from 'src/app/Modelos/Inventario';
+import { InventarioService } from 'src/app/Servicios/inventario.service';
 
 @Component({
   selector: 'app-producto',
@@ -15,6 +17,9 @@ import { OrdenService } from 'src/app/Servicios/orden.service';
   providers: [MessageService]
 })
 export class ProductoComponent implements OnInit{
+  inventario:GenerarInventario={
+    materiales:[]
+  }
   productDialog: boolean = false;
 
   deleteProductDialog: boolean = false;
@@ -45,7 +50,7 @@ export class ProductoComponent implements OnInit{
 
   rowsPerPageOptions = [5, 10, 20];
 
-  constructor(private orderService:OrdenService,private productService: ProductoService, private messageService: MessageService) { }
+  constructor(private inventarioService:InventarioService,private orderService:OrdenService,private productService: ProductoService, private messageService: MessageService) { }
   
   ngOnInit() {
       this.productService.ObtenerProductos().subscribe(data => this.products = data);
@@ -181,5 +186,14 @@ isEdit:boolean=false;
     },err=>{
       this.orderProductDialog = false;
     });
+  }
+
+  generarInventario(){
+    this.materialFaltante.forEach(m=>this.inventario.materiales.push({materialId:m.materialId,cantidad:m.cantidadFaltante})); 
+    this.inventarioService.generarInventario(this.inventario).subscribe(data => {
+      this.messageService.add({ severity: 'success', summary: 'Inventario', detail: 'Inventario Generado, pedido realizado', life: 3000 });
+      this.faltanteDialog = false;
+    });
+  
   }
 }

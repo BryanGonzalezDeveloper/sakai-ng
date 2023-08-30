@@ -11,6 +11,6 @@ export class InventarioService {
   constructor(private http:HttpClient) { }
 
   generarInventario(inventario:GenerarInventario){
-    return this.http.post(`${this.url}/api/v1Inventario`,inventario);
+    return this.http.post(`${this.url}/api/v1/Inventario`,inventario);
   }
 }
