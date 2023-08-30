@@ -1,5 +1,4 @@
 export interface GenerarInventario {
-    fecha:      Date|string;
     materiales: Materiales[];
 }
 

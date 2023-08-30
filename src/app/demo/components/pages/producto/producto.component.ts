@@ -5,7 +5,7 @@ import { ProductService } from 'src/app/demo/service/product.service';
 import { MessageService } from 'primeng/api';
 import { CrearProductos, EditarProductos, ObtenerProductos } from 'src/app/Modelos/Producto';
 import { ProductoService } from 'src/app/Servicios/producto.service';
-import { CrearOrden } from 'src/app/Modelos/Orden';
+import { CrearOrden, MaterialFaltante } from 'src/app/Modelos/Orden';
 import { OrdenService } from 'src/app/Servicios/orden.service';
 
 @Component({
@@ -21,12 +21,13 @@ export class ProductoComponent implements OnInit{
 
   deleteProductsDialog: boolean = false;
   orderProductDialog: boolean = false;  
+  faltanteDialog: boolean = false;  
   order:CrearOrden={
     productoId:0,
     cantidad:0  
   }
   products: ObtenerProductos[] = [];
-
+  materialFaltante:MaterialFaltante[]=[]; 
   product: ObtenerProductos = {
     id: 0,
     nombre: '',
@@ -38,6 +39,7 @@ export class ProductoComponent implements OnInit{
   submitted: boolean = false;
 
   cols: any[] = [];
+  col2: any[] = [];
 
   statuses: any[] = [];
 
@@ -94,7 +96,8 @@ isEdit:boolean=false;
 
   hideDialog() {
       this.productDialog = false;
-      this.orderProductDialog=false;  
+      this.orderProductDialog=false;
+      this.faltanteDialog=false;  
       this.submitted = false;
   }
 
@@ -165,6 +168,15 @@ isEdit:boolean=false;
       this.orderProductDialog = false;
       if(data.materialFaltante.length>0){
         this.messageService.add({ severity: 'warn', summary: 'Orden', detail: 'Material Faltante', life: 3000 });
+        this.materialFaltante=data.materialFaltante;
+        this.cols = [
+          { field: 'materialId', header: 'materialId' },
+          { field: 'nombreMaterial', header: 'nombreMaterial' },
+          { field: 'cantidadFaltante', header: 'cantidadFaltante' },
+          { field: 'costo', header: 'costo' },
+      ];
+
+        this.faltanteDialog=true;
       }
     },err=>{
       this.orderProductDialog = false;
