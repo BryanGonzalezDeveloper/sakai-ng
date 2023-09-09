@@ -74,6 +74,18 @@
                         <p-inputNumber id="precio" [(ngModel)]="product.stockActual" mode="currency" currency="MXN" locale="en-US"></p-inputNumber>
                     </div>
                 </div>
+                <div class="field">
+                    <label for="image">Imagen</label>
+                    <p-fileUpload
+                      name="image"
+                      customUpload="true"
+                      (uploadHandler)="onUpload($event)"
+                      [showUploadButton]="false"
+                      [showCancelButton]="false"
+                      accept="image/*"
+                      label="Cargar"
+                    ></p-fileUpload>
+                  </div>
             </ng-template>
 
             <ng-template pTemplate="footer">

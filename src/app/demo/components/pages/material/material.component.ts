@@ -146,5 +146,16 @@ isEdit:boolean=false;
   onGlobalFilter(table: Table, event: Event) {
       table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
+  onUpload(event: any) {
+    const file = event.files[0];
+    console.log(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.crearProd.imagen = e.target.result;
+        console.log(this.product.imagen);
+      };
+  }
+}
 
 }
